@@ -1,7 +1,0 @@
-print(........MENU.......)
-print(01.account creation)
-print(02.deposit money)
-print(03.withraw money)
-print(04.check balance)
-print(05.transaction history)
-print(06.exit)

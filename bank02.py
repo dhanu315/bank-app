@@ -1,12 +1,13 @@
 print("user_ID = 1010,Admin")
 
-admin_ID = input("enter your id: ")
-cus_ID = "100000"
-account = "200000"
+Admin_id =input("enter your id:")
+cuss_id = "1001"
+account = "1002"
 
-
-while admin_ID == '1010':
-    print(".......MENU.......")
+while Admin_ID == '1010':
+ 
+# admin_ID == '1010'
+    print(".......BANKING APP.......")
     print("01.create customer")
     print("02.create account")
     print("03.deposit money")
@@ -21,7 +22,8 @@ while admin_ID == '1010':
         cus_name = input("Enter your customer Name:")
         cus_pswrd = input("Enter your customer password:")
         Balance = input("enter your initial balance")
-        cus_ID +=1
+        cus_ID =1
+
         cus_file=open("customer.txt",'w')
         cus_file.write(f"{cus_ID}\t")
         cus_file.write(f"{cus_pswrd}\t")
