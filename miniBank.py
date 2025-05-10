@@ -1,6 +1,17 @@
-# Dictionary to store all accounts
+
 accounts = {}
 next_account_number = 1001
+
+def get_account_number():
+    try:
+        acc_num = int(input("enter account number:"))
+        if acc_num is not accounts:
+            print("account not found")
+            return None 
+        return acc_num 
+    except ValueError:
+        print("invalid account number:")
+        return None
 
 def create_account():
     global next_account_number
@@ -9,7 +20,7 @@ def create_account():
         print("name cannot be empty.")
         return
     try:
-        balance = float("enter initial balance(non-negative):")
+        balance = float(input("enter initial balance(non-negative):"))
         if balance < 0:
             print("initial balance must be non-nagative.")
             return
@@ -26,16 +37,16 @@ def create_account():
     "Balance": balance,
     "Transaction":[f"account created with balance:{balance}"]
  }
-    print(f"account created successfully! account number: {account_number} ")
+    print(f"account created successfully!")
 
 
 def deposit_money():
+    get_account_number()
     acc_num = get_account_number
     if acc_num is None:
         return
-
+    amount = float(input("enter the amount to deposit:"))
     try:
-        amount = float(input("enter the amount to deposit:"))
         if amount <=0:
             print("deposit amount must be positive")
             return
@@ -43,7 +54,7 @@ def deposit_money():
         print("invalid input,amount must be a number")
         return
 
-    accounts[acc_num]["balance"] += amount
+    accounts[acc_num]["Balance"] += amount
     accounts[acc_num]["transaction"].append(f"deposit d:{amount}")
     print("deposit successful")
 
@@ -56,18 +67,21 @@ def withdraw_money():
         amount = float(input("enter the amount to withdraw:"))
         if amount <=0:
             print("withdraw amount must be positive")
-        return
+        
+        if amount > accounts[acc_num]["balance"]:
+            print("insufficient balance")
+            return
+        accounts[acc_num]["balance"] -= amount
+        accounts[acc_num]["transactions"].append(f"withdraw:{amount}")
+        print("withdraw successful")        
+
+        
     except ValueError:
         print("invalid input,withraw must be a number")
         return
-    
-if amount > accounts[acc_num]["balance"]:
-    print("insufficient balance")
-    
+            
+        
 
-accounts[acc_num]["balance"] -= amount
-accounts[acc_num]["transactions"].append(f"withdraw:{amount}")
-print("withdraw successful")  
 
 
 def check_balance():
@@ -89,16 +103,7 @@ def transaction_history():
     for transaction in accounts[acc_num]["transaction"]:
      print("-",transaction)
 
-def get_account_number():
-    try:
-        acc_num = int(input("enter account number:"))
-        if acc_num is not accounts:
-            print("account not found")
-            return None 
-        return acc_num 
-    except ValueError:
-        print("invalid account number:")
-        return None
+
 
 
 def main_menu():
@@ -111,24 +116,23 @@ def main_menu():
         print("5.transaction history")
         print("6.exit")
 
-choice = input("choose an option(1-6)")
-if choice == "1":
-    create_account()
-elif choice == "2":
-     deposit_money()
-elif choice == "3":
-     withdraw_money()
-elif choice == "4":
-    check_balance()
-elif choice == "5":
-    transaction_history()
-elif choice == "6":
-    exit()
-else:
-    print("invalid choice, plese select a valid option")
+        choice = input("choose an option(1-6)")
+        if choice == "1":
+            create_account()
+        elif choice == "2":
+            deposit_money()
+        elif choice == "3":
+            withdraw_money()
+        elif choice == "4":
+            check_balance()
+        elif choice == "5":
+            transaction_history()
+        elif choice == "6":
+            exit()
+        else:
+            print("invalid choice, plese select a valid option")
 
-    if__name__ == "__main__"
-    main_menu()
+main_menu()
 
 
 
